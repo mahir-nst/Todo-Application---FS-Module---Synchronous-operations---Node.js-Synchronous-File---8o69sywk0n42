@@ -25,8 +25,10 @@ const getTodosSync = () => {
 const getTodoSync = (id) => {
   const text = fs.readFileSync(DB_PATH, 'utf8');
   const arr = dbTextToJson(text);
-  return JSON.stringify(arr.filter(item => item.id === id));
+  const todo = arr.find(item => item.id === id);
+  return todo ? JSON.stringify(todo) : null; 
 };
+
 
 const createTodoSync = (todoTitle) => {
   const obj = {
